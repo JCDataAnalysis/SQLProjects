@@ -34,7 +34,6 @@ JOIN b ON a.ParcelID = b.ParcelID
 SET a.PropertyAddress = COALESCE(a.PropertyAddress, b.PropertyAddress)
 WHERE a.PropertyAddress IS NULL;
 
-
 --Breaking down Address into Individual Columns (Address, City, State)
 
 SELECT PropertyAddress
