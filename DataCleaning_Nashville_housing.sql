@@ -1,6 +1,6 @@
 SELECT * FROM Projects.nashville_housing;
 
-##Standarize Date Format
+--Standarize Date Format
 
 SELECT SaleDate, DATE(SaleDate) AS SaleDateConverted
 FROM Projects.nashville_housing;
@@ -11,7 +11,7 @@ ADD SaleDateConverted Date;
 UPDATE Projects.nashville_housing
 SET SaleDateConverted = DATE(SaleDate)
 
-##Populate Property Address data 
+--Populate Property Address data 
 
 SELECT PropertyAddress
 FROM Projects.nashville_housing
@@ -35,7 +35,7 @@ SET a.PropertyAddress = COALESCE(a.PropertyAddress, b.PropertyAddress)
 WHERE a.PropertyAddress IS NULL;
 
 
-##Breaking down Address into Individual Columns (Address, City, State)
+--Breaking down Address into Individual Columns (Address, City, State)
 
 SELECT PropertyAddress
 FROM Projects.nashville_housing
@@ -89,7 +89,7 @@ UPDATE Projects.nashville_housing
 SET OwnerSplitState = SUBSTRING_INDEX(OwnerAddress, ',', -1);
 
 
-##Change Y and N into Yes and No in "Sold as Vacant" field
+--Change Y and N into Yes and No in "Sold as Vacant" field
 
 SELECT DISTINCT(SoldAsVacant), COUNT(SoldAsVacant)
 FROM Projects.nashville_housing
@@ -110,7 +110,7 @@ SET SoldAsVacant = CASE
 END
 WHERE SoldAsVacant IN('Y', 'N');
 
-##Remove duplicates (MySql 
+--Remove duplicates 
 
 DELETE t
 FROM Projects.nashville_housing t
@@ -122,7 +122,7 @@ WHERE (SELECT COUNT(*)
          AND LegalReference = t.LegalReference
          AND UniqueID <= t.UniqueID) > 1;
 
-##Delete unused columns
+--Delete unused columns
 
 SELECT *
 FROM Projects.nashville_housing;
